@@ -1,80 +1,76 @@
-INSERT INTO [Users] ([userName], [email], [password], [phoneNumber], [role], [gender], [birthday]) VALUES
-('Alice Johnson', 'alice.johnson@gmail.com', 'password123', '1111111111', 'Driver', 'Female', '1990-05-15'),
-('Carol White', 'carol.white@gmail.com', 'password123', '2222222222', 'Manager', 'Female', '1992-11-30'),
-('Bob Smith', 'bob.smith@gmail.com', 'password123', '3333333333', 'Driver', 'Male', '1985-08-22'),
-('Emma Davis', 'emma.davis@gmail.com', 'password123', '4444444444', 'Manager', 'Female', '1995-07-25'),
-('David Brown', 'david.brown@gmail.com', 'password123', '5555555555','Driver', 'Male', '1988-03-10'),
-('Frank Wilson', 'frank.wilson@gmail.com', 'password123', '6666666666', 'Manager', 'Male', '1983-12-05'),
-('Nguyen Duc Lam', 'nguyenduclam@gmail.com', 'password123', '7777777777', 'Admin', 'Male', '2004-04-07'),
-('Hank Miller', 'hank.miller@gmail.com', 'password123', '8888888888', 'Parent', 'Male', '1986-09-12'),
-('Ivy Martinez', 'ivy.martinez@gmail.com', 'password123', '9999999999', 'Parent', 'Female', '1994-02-27'),
-('Jack Garcia', 'jack.garcia@gmail.com', 'password123', '0000000000', 'Parent', 'Male', '1982-06-14'),
-('Lily Evans', 'lily.evans@gmail.com', 'password123', '1212121212', 'Parent', 'Female', '1989-01-14'),
-('Mark Taylor', 'mark.taylor@gmail.com', 'password123', '1313131313', 'Parent', 'Male', '1987-10-03'),
-('Nina Roberts', 'nina.roberts@gmail.com', 'password123', '1414141414', 'Parent', 'Female', '1993-05-17'),
-('Oscar Reed', 'oscar.reed@gmail.com', 'password123', '1515151515', 'Parent', 'Male', '1990-02-22'),
-('Paula Turner', 'paula.turner@gmail.com', 'password123', '1616161616', 'Parent', 'Female', '1988-09-30'),
-('Quincy Adams', 'quincy.adams@gmail.com', 'password123', '1717171717', 'Parent', 'Male', '1979-04-12'),
-('Steve Wilson', 'steve.wilson@gmail.com', 'password123', '1818181818', 'Parent', 'Male', '1985-11-11'),
-('Tina Johnson', 'tina.johnson@gmail.com', 'password123', '1919191919', 'Parent', 'Female', '1991-03-20'),
-('Ulysses Grant', 'ulysses.grant@gmail.com', 'password123', '2020202020', 'Parent', 'Male', '1980-06-15'),
-('Rachel Harris', 'rachel.harris@gmail.com', 'password123', '2121212121', 'Parent', 'Female', '1996-07-05');
+﻿USE [School_Bus];
+GO
 
+INSERT INTO [Buses] ([busName], [busStatus]) VALUES
+('Bus 1', 'Running'),
+('Bus 2', 'Stopped'),
+('Bus 3', 'Running');
+
+INSERT INTO [Users] ([userName], [email], [password], [phoneNumber], [location], [gender], [birthday], [role], [busId]) VALUES
+('Nguyen Van A', 'nguyenvana@gmail.com', 'password123', '0912345678', 'Hà Nội', 'Male', '1990-05-15', 'Driver', 1),
+('Tran Thi B', 'tranthib@gmail.com', 'password123', '0923456789', 'Hà Nội', 'Female', '1985-08-22', 'Manager', 1),
+('Le Van C', 'levanc@gmail.com', 'password123', '0934567890', 'Hồ Chí Minh', 'Male', '1992-11-30', 'Driver', 2),
+('Pham Thi D', 'phamthid@gmail.com', 'password123', '0945678901', 'Đà Nẵng', 'Female', '1988-03-10', 'Manager', 2),
+('Vu Thi H', 'vuthih@gmail.com', 'password123', '0989012345', 'Hải Phòng', 'Female', '1987-06-23', 'Driver', 3),
+('Bui Van I', 'buivani@gmail.com', 'password123', '0910123456', 'Hà Nội', 'Male', '1994-02-27', 'Manager', 3),
+('Nguyen Duc Lam', 'nguyenduclam@gmail.com', '12345678', '0967890123', 'Hà Nội', 'Male', '2004-04-07', 'Admin', NULL),
+('Do Van E', 'dovane@gmail.com', 'password123', '0956789012', 'Cần Thơ', 'Male', '1995-07-25', 'Parent', NULL),
+('Nguyen Van G', 'nguyenvang@gmail.com', 'password123', '0978901234', 'Hồ Chí Minh', 'Male', '1990-02-14', 'Parent', NULL),
+('Tran Van J', 'tranvanj@gmail.com', 'password123', '0921234567', 'Đà Nẵng', 'Male', '1982-06-14', 'Parent', NULL),
+('Pham Thi K', 'phamthik@gmail.com', 'password123', '0932345678', 'Huế', 'Female', '1991-03-30', 'Parent', NULL),
+('Nguyen Van L', 'nguyenvanl@gmail.com', 'password123', '0943456789', 'Nha Trang', 'Male', '1986-09-10', 'Parent', NULL),
+('Le Thi M', 'lethim@gmail.com', 'password123', '0954567890', 'Bình Dương', 'Female', '1997-05-20', 'Parent', NULL),
+('Nguyen Van N', 'nguyenvann@gmail.com', 'password123', '0965678901', 'Vũng Tàu', 'Male', '1985-12-25', 'Parent', NULL),
+('Tran Thi O', 'tranthio@gmail.com', 'password123', '0976789012', 'Hà Nội', 'Female', '1993-07-12', 'Parent', NULL),
+('Do Van P', 'dovanp@gmail.com', 'password123', '0987890123', 'Hồ Chí Minh', 'Male', '1980-01-15', 'Parent', NULL),
+('Nguyen Thi Q', 'nguyenthic@gmail.com', 'password123', '0998901234', 'Hà Nội', 'Female', '1992-08-08', 'Parent', NULL),
+('Le Van R', 'levanr@gmail.com', 'password123', '0919012345', 'Đà Nẵng', 'Male', '1989-04-17', 'Parent', NULL),
+('Hoang Van S', 'hoangvans@gmail.com', 'password123', '0920123456', 'Hải Phòng', 'Male', '1991-11-11', 'Parent', NULL),
+('Tran Thi T', 'tranthit@gmail.com', 'password123', '0931234567', 'Huế', 'Female', '1996-10-19', 'Parent', NULL);
 
 INSERT INTO [Students] ([studentName], [gender], [birthday], [studentStatus], [userId]) VALUES
-('Liam Smith', 'Male', '2000-01-15', 'Got on', 9),
-('Olivia Johnson', 'Female', '2001-03-22', 'Not use', 17),
-('Noah Brown', 'Male', '2002-06-05', 'Got off', 18),
-('Emma Davis', 'Female', '2000-09-30', 'Got on', 19),
-('Ava Wilson', 'Female', '2003-12-12', 'Got off', 20),
-('William Lee', 'Male', '1999-05-18', 'Got on', 9),
-('Sophia Martinez', 'Female', '2004-04-21', 'Got off', 12),
-('James Garcia', 'Male', '2002-11-11', 'Got on', 13),
-('Isabella Rodriguez', 'Female', '2000-10-10', 'Got on', 14),
-('Mason Hernandez', 'Male', '1998-08-08', 'Not use', 15),
-('Aiden Thompson', 'Male', '2001-02-14', 'Got on', 8),
-('Chloe Williams', 'Female', '2000-04-19', 'Got off', 10),
-('Ethan Taylor', 'Male', '2002-07-12', 'Got on', 11),
-('Nguyen Du Di', 'Female', '1998-08-07', 'Got on', 16);
-
-INSERT INTO [Buses] ([busName], [studentStatus]) VALUES
-('Bus A', 'Active'),
-('Bus B', 'Active'),
-('Bus C', 'Inactive');
+('Liam Nguyen', 'Male', '2010-01-15', 'Got on', 8), 
+('Emma Pham', 'Female', '2011-03-22', 'Got off', 10), 
+('Noah Le', 'Male', '2012-06-05', 'Not use', 11), 
+('Sophia Tran', 'Female', '2013-09-30', 'Got on', 12), 
+('Ava Vu', 'Female', '2010-12-12', 'Got off', 13), 
+('William Bui', 'Male', '2014-05-18', 'Got on', 14), --gia đình có 2 con
+('James Do', 'Male', '2009-11-11', 'Got on', 15), 
+('Isabella Nguyen', 'Female', '2011-10-10', 'Not use', 16), 
+('Mason Hoang', 'Male', '2008-08-08', 'Got on', 17), 
+('Ethan Tran', 'Male', '2009-09-09', 'Got on', 18), 
+('Lucas Nguyen', 'Male', '2012-12-12', 'Got off', 19),
+('Mia Do', 'Female', '2011-11-11', 'Not use', 16), --gia đình có 2 con 
+('Oliver Tran', 'Male', '2013-05-05', 'Got on', 20),
+('Harper Pham', 'Female', '2010-07-07', 'Got on', 9), 
+('Amelia Bui', 'Female', '2009-09-09', 'Got on', 14),
+('Henry Do', 'Male', '2012-03-15', 'Got on', 8), --gia đình có 2 con
+('Lily Nguyen', 'Female', '2010-06-20', 'Got off', 9); --gia đình có 2 con
 
 INSERT INTO [BusStatus] ([describe], [busId]) VALUES
-('Others', 1),
-('Broken', 3),
-('Run out of fuel', 3);
+('Out of fuel', 2);
 
-INSERT INTO [TravelHistory] ([location], [dropOffPoint], [pickUpPoint], [BoardingTime], [AlightingTime], [studentId], [busId]) VALUES
---From home to school
-('Downtown', 'FPT University', 'VinhTru', '2024-10-19 06:02:00', '2024-10-19 07:00:00', 2, 1),
-('Vincom', 'FPT University', 'Garden', '2024-10-19 06:03:00', '2024-10-19 07:00:00', 1, 1),
-('Vincom', 'FPT University', 'Garden', '2024-10-19 06:03:00', '2024-10-19 07:00:00', 6, 1),
-('City Center', 'FPT University', 'Park Ave', '2024-10-19 06:05:00', '2024-10-19 07:00:00', 3, 2),
-('Suburbs', 'FPT University', 'Broadway Ave', '2024-10-19 06:15:00', '2024-10-19 07:00:00', 4, 3),
-('Town Square', 'FPT University', 'River Rd', '2024-10-19 06:30:00', '2024-10-19 07:00:00', 5, 1),
-('City Hall', 'FPT University', 'Elm St', '2024-10-19 06:44:00', '2024-10-19 07:00:00', 7, 2),
---From school to home 
-('Downtown', 'VinhTru', 'FPT University', '2024-10-19 17:00:00', '2024-10-19 17:58:00', 2, 1),
-('Vincom', 'Garden', 'FPT University', '2024-10-19 17:00:00', '2024-10-19 17:57:00', 1, 2),
-('Vincom', 'Garden', 'FPT University', '2024-10-19 17:00:00', '2024-10-19 17:57:00', 6, 2),
-('City Center', 'Park Ave', 'FPT University', '2024-10-19 17:00:00', '2024-10-19 17:55:00', 3, 2),
-('Suburbs', 'Broadway Ave', 'FPT University', '2024-10-19 17:00:00', '2024-10-19 17:45:00', 4, 3),
-('Town Square', 'River Rd', 'FPT University', '2024-10-19 17:00:00', '2024-10-19 17:30:00', 5, 1),
-('City Hall', 'Elm St', 'FPT University', '2024-10-19 17:00:00', '2024-10-19 17:16:00', 7, 2);
-
-INSERT INTO [Bus_Driver]([busId], [userId]) VALUES 
-(1,1),
-(2,3),
-(3,5);
-
-INSERT INTO [Bus_Manager]([busId], [userId]) VALUES 
-(1,2),
-(2,4),
-(3,6);
-
-
-
+INSERT INTO [TravelHistory] ([pickUpPoint], [dropOffPoint], [BoardingTime], [AlightingTime], [studentId], [busId]) VALUES
+('Home 1', 'School Gate', '07:00', '08:00', 1, 1),
+('Home 2', 'School Gate', '07:10', '08:00', 2, 1),
+('Park', 'School Gate', '07:20', '08:00', 3, 1),
+('Library', 'School Gate', '07:30', '08:00', 4, 1),
+('Cafe', 'School Gate', '07:40', '08:00', 5, 1),
+('School Gate', 'Home 1', '17:00', '17:30', 1, 2),
+('School Gate', 'Home 2', '17:00', '17:35', 2, 2),
+('School Gate', 'Park', '17:00', '17:40', 3, 2),
+('School Gate', 'Library', '17:00', '17:45', 4, 2),
+('School Gate', 'Cafe', '17:00', '17:50', 5, 2),
+('School Gate', 'Home 3', '17:00', '17:30', 6, 1),
+('School Gate', 'Home 4', '17:00', '17:35', 7, 1),
+('School Gate', 'Home 5', '17:00', '17:40', 8, 1),
+('School Gate', 'Home 6', '17:00', '17:45', 9, 1),
+('School Gate', 'Home 7', '17:00', '17:50', 10, 3),
+('School Gate', 'Home 8', '17:00', '17:55', 11, 3),
+('School Gate', 'Home 9', '17:00', '18:00', 12, 3),
+('School Gate', 'Home 10', '17:00', '18:05', 13, 1),
+('School Gate', 'Home 11', '17:00', '18:10', 14, 2),
+('School Gate', 'Home 12', '17:00', '18:15', 15, 3),
+('School Gate', 'Home 13', '17:00', '18:20', 16, 2),
+('School Gate', 'Home 14', '17:00', '18:25', 17, 1);
 

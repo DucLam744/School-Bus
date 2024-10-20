@@ -46,6 +46,13 @@ EXEC Sp_executesql @sql2
 GO
 
 --Create tables--
+CREATE TABLE [Buses] (
+	[busId] INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	[busName] NVARCHAR(255) NOT NULL,
+	[busStatus] NVARCHAR(255), --xe đang dừng hay đang đi 
+)
+GO
+
 CREATE TABLE [Users] (
 	[userId] INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	[userName] NVARCHAR(255) NOT NULL,
@@ -53,9 +60,12 @@ CREATE TABLE [Users] (
 	[password] NVARCHAR(255) NOT NULL,
 	[phoneNumber] VARCHAR(11) UNIQUE CHECK([phoneNumber] LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
 		OR [phoneNumber] LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
-	[role] NVARCHAR(255) NOT NULL,
+	[location] NVARCHAR(255), --địa chỉ nhà
 	[gender] nvarchar(255),
 	[birthday] date,
+	[role] NVARCHAR(255) NOT NULL,
+	[busId] INT NOT NULL, --nếu user là tài xế hay người quản lí xe thì họ thuộc xe nào, nếu là phụ huynh hay admin thì NULL
+	FOREIGN KEY ([busId]) REFERENCES [Buses]([busId]),
 )
 GO
 
@@ -64,30 +74,9 @@ CREATE TABLE [Students] (
 	[studentName] NVARCHAR(255) NOT NULL,
 	[gender] NVARCHAR(255),
 	[birthday] DATE,
-	[studentStatus] NVARCHAR(255),
+	[studentStatus] NVARCHAR(255), --đã lên xe/đã xuống xe/không sử dụng xe tuyến
 	[userId] INT NOT NULL, --ID cua phu huynh
 	FOREIGN KEY ([userId]) REFERENCES [Users]([userId]),
-)
-GO
-
-CREATE TABLE [Buses] (
-	[busId] INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	[busName] NVARCHAR(255) NOT NULL,
-	[busStatus] NVARCHAR(255), --xe dang dung hay dang di 
-)
-GO
-
-CREATE TABLE [Bus_Manager] ( --Bảng cho biết người quản lí của từng xe bus tương ứng
-	[busId] INT FOREIGN KEY REFERENCES [Buses]([busId]),
-	[userId] INT FOREIGN KEY REFERENCES [Users]([userId]),
-	PRIMARY KEY ([busId], [userId]),
-)
-GO
-
-CREATE TABLE [Bus_Driver] ( -- bảng cho biết tài xế của từng xe bus tương ứng
-	[busId] INT FOREIGN KEY REFERENCES [Buses]([busId]),
-	[userId] INT FOREIGN KEY REFERENCES [Users]([userId]),
-	PRIMARY KEY ([busId], [userId]),
 )
 GO
 
@@ -101,11 +90,10 @@ GO
 
 CREATE TABLE [TravelHistory] ( 
 	[historyId] INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	[location] NVARCHAR(255),
-	[dropOffPoint] NVARCHAR(255),
-	[pickUpPoint] NVARCHAR(255),
-	[BoardingTime] NVARCHAR(255),
-    [AlightingTime] NVARCHAR(255),
+	[pickUpPoint] NVARCHAR(255), --điểm đón học sinh
+	[dropOffPoint] NVARCHAR(255), --điểm trả học sinh
+	[BoardingTime] NVARCHAR(255), --giờ lên xe
+    [AlightingTime] NVARCHAR(255), --giờ xuống xe 
 	[studentId] INT NOT NULL,
 	FOREIGN KEY ([studentId]) REFERENCES [Students]([studentId]),
 	[busId] INT NOT NULL,
