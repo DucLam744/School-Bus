@@ -2,18 +2,18 @@
 GO
 
 --Drop database if exists--
-IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'School_Bus')
+IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'school_bus')
 BEGIN
-	ALTER DATABASE [School_Bus] SET OFFLINE WITH ROLLBACK IMMEDIATE;
-	ALTER DATABASE [School_Bus] SET ONLINE;
-	DROP DATABASE [School_Bus];
+	ALTER DATABASE [school_bus] SET OFFLINE WITH ROLLBACK IMMEDIATE;
+	ALTER DATABASE [school_bus] SET ONLINE;
+	DROP DATABASE [school_bus];
 END
 GO
 
-CREATE DATABASE [School_Bus];
+CREATE DATABASE [school_bus];
 GO 
 
-USE [School_Bus];
+USE [school_bus];
 GO
 
 --Drop constraints--
@@ -46,58 +46,58 @@ EXEC Sp_executesql @sql2
 GO
 
 --Create tables--
-CREATE TABLE [Buses] (
-	[busId] INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	[busName] NVARCHAR(255) NOT NULL,
-	[busStatus] NVARCHAR(255), --xe đang dừng hay đang đi 
+CREATE TABLE [buses] (
+	[bus_id] INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	[bus_name] NVARCHAR(255) NOT NULL,
+	[bus_status] NVARCHAR(255), --xe đang dừng hay đang đi 
 )
 GO
 
-CREATE TABLE [Users] (
-	[userId] INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	[userName] NVARCHAR(255) NOT NULL,
+CREATE TABLE [users] (
+	[user_id] INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	[user_name] NVARCHAR(255) NOT NULL,
 	[email] NVARCHAR(255) CHECK(Email LIKE '%@gmail.com') NOT NULL,
 	[password] NVARCHAR(255) NOT NULL,
-	[phoneNumber] VARCHAR(11) UNIQUE CHECK([phoneNumber] LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
-		OR [phoneNumber] LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+	[phone_number] VARCHAR(11) UNIQUE CHECK([phone_number] LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
+		OR [phone_number] LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
 	[location] NVARCHAR(255), --địa chỉ nhà
 	[gender] nvarchar(255),
 	[birthday] date,
 	[role] NVARCHAR(255) NOT NULL,
-	[busId] INT NOT NULL, --nếu user là tài xế hay người quản lí xe thì họ thuộc xe nào, nếu là phụ huynh hay admin thì NULL
-	FOREIGN KEY ([busId]) REFERENCES [Buses]([busId]),
+	[bus_id] INT, --nếu user là tài xế hay người quản lí xe thì họ thuộc xe nào, nếu là phụ huynh hay admin thì NULL
+	FOREIGN KEY ([bus_id]) REFERENCES [buses]([bus_id]),
 )
 GO
 
-CREATE TABLE [Students] (
-	[studentId] INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	[studentName] NVARCHAR(255) NOT NULL,
+CREATE TABLE [students] (
+	[student_id] INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	[student_name] NVARCHAR(255) NOT NULL,
 	[gender] NVARCHAR(255),
 	[birthday] DATE,
-	[studentStatus] NVARCHAR(255), --đã lên xe/đã xuống xe/không sử dụng xe tuyến
-	[userId] INT NOT NULL, --ID cua phu huynh
-	FOREIGN KEY ([userId]) REFERENCES [Users]([userId]),
+	[student_status] NVARCHAR(255), --đã lên xe/đã xuống xe/không sử dụng xe tuyến
+	[parent_id] INT, --ID cua phu huynh
+	FOREIGN KEY ([parent_id]) REFERENCES [users]([user_id]),
 )
 GO
 
-CREATE TABLE [BusStatus] ( --bảng cho biết xe có tình trạng, sự cố gì
-	[statusId] INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+CREATE TABLE [bus_status] ( --bảng cho biết xe có tình trạng, sự cố gì
+	[status_id] INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	[describe] NVARCHAR(255),
-	[busId] INT NOT NULL,
-	FOREIGN KEY ([busId]) REFERENCES [Buses]([busId]),
+	[bus_id] INT,
+	FOREIGN KEY ([bus_id]) REFERENCES [buses]([bus_id]),
 )
 GO
 
-CREATE TABLE [TravelHistory] ( 
-	[historyId] INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	[pickUpPoint] NVARCHAR(255), --điểm đón học sinh
-	[dropOffPoint] NVARCHAR(255), --điểm trả học sinh
-	[BoardingTime] NVARCHAR(255), --giờ lên xe
-    [AlightingTime] NVARCHAR(255), --giờ xuống xe 
-	[studentId] INT NOT NULL,
-	FOREIGN KEY ([studentId]) REFERENCES [Students]([studentId]),
-	[busId] INT NOT NULL,
-	FOREIGN KEY ([busId]) REFERENCES [Buses]([busId]),
+CREATE TABLE [travel_history] ( 
+	[history_id] INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	[pick_up_point] NVARCHAR(255), --điểm đón học sinh
+	[drop_off_point] NVARCHAR(255), --điểm trả học sinh
+	[boarding_time] NVARCHAR(255), --giờ lên xe
+    [alighting_time] NVARCHAR(255), --giờ xuống xe 
+	[student_id] INT,
+	FOREIGN KEY ([student_id]) REFERENCES [students]([student_id]),
+	[bus_id] INT,
+	FOREIGN KEY ([bus_id]) REFERENCES [buses]([bus_id]),
 )
 GO
 
